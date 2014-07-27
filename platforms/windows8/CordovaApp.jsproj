@@ -1,0 +1,314 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemGroup Label="ProjectConfigurations">
+        <ProjectConfiguration Include="Debug|AnyCPU">
+            <Configuration>Debug</Configuration>
+            <Platform>AnyCPU</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Debug|ARM">
+            <Configuration>Debug</Configuration>
+            <Platform>ARM</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Debug|x64">
+            <Configuration>Debug</Configuration>
+            <Platform>x64</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Debug|x86">
+            <Configuration>Debug</Configuration>
+            <Platform>x86</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release|AnyCPU">
+            <Configuration>Release</Configuration>
+            <Platform>AnyCPU</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release|ARM">
+            <Configuration>Release</Configuration>
+            <Platform>ARM</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release|x64">
+            <Configuration>Release</Configuration>
+            <Platform>x64</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release|x86">
+            <Configuration>Release</Configuration>
+            <Platform>x86</Platform>
+        </ProjectConfiguration>
+    </ItemGroup>
+    <PropertyGroup Label="Globals">
+        <ProjectGuid>efffab2f-bfc5-4eda-b545-45ef4995f55a</ProjectGuid>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0'">
+        <VisualStudioVersion>11.0</VisualStudioVersion>
+    </PropertyGroup>
+    <Import Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" />
+    <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
+    <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
+    <PropertyGroup>
+        <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+        <TargetPlatformVersion>8.0</TargetPlatformVersion>
+        <DefaultLanguage>en-US</DefaultLanguage>
+        <PackageCertificateKeyFile>CordovaApp_TemporaryKey.pfx</PackageCertificateKeyFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <AppxManifest Include="package.appxmanifest">
+            <SubType>Designer</SubType>
+        </AppxManifest>
+        <Content Include="images\logo.png" />
+        <Content Include="images\smalllogo.png" />
+        <Content Include="images\splashscreen.png" />
+        <Content Include="images\storelogo.png" />
+        <None Include="CordovaApp_TemporaryKey.pfx" />
+    </ItemGroup>
+    <ItemGroup>
+        <SDKReference Include="Microsoft.WinJS.1.0, Version=1.0" />
+    </ItemGroup>
+    <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+    <PropertyGroup>
+        <PreBuildEvent>
+Powershell -ExecutionPolicy RemoteSigned Unblock-File '$(ProjectDir)\cordova\lib\ApplyPlatformConfig.ps1'; Powershell -File '$(ProjectDir)\cordova\lib\ApplyPlatformConfig.ps1' '$(ProjectDir)\';
+    </PreBuildEvent>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="www\cordova.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\cordova_plugins.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\ionic.app.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\ionic.app.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\css\style.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\img\ionic.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\index.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\app.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\controllers.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\js\services.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\css\ionic.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\css\ionic.min.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\fonts\ionicons.eot" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\fonts\ionicons.svg" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\fonts\ionicons.ttf" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\fonts\ionicons.woff" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular\angular-animate.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular\angular-animate.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular\angular-resource.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular\angular-resource.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular\angular-sanitize.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular\angular-sanitize.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular\angular.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular\angular.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular-ui\angular-ui-router.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\angular-ui\angular-ui-router.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\ionic-angular.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\ionic-angular.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\ionic.bundle.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\ionic.bundle.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\ionic.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\js\ionic.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\ionic.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\ionicons\ionicons.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\ionicons\_ionicons-animation.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\ionicons\_ionicons-font.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\ionicons\_ionicons-icons.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\ionicons\_ionicons-variables.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_action-sheet.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_animations.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_backdrop.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_badge.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_bar.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_button-bar.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_button.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_checkbox.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_form.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_grid.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_items.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_list.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_loading.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_menu.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_mixins.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_modal.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_platform.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_popup.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_progress.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_radio.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_range.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_reset.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_scaffolding.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_select.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_slide-box.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_split-pane.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_tabs.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_toggle.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_type.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_util.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\scss\_variables.scss" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\version.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.ionic.keyboard\www\keyboard.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.console\www\console-via-logger.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.console\www\logger.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.device\src\windows8\DeviceProxy.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.device\www\device.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\templates\friend-detail.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\templates\tab-account.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\templates\tab-dash.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\templates\tab-friends.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\templates\tabs.html" />
+    </ItemGroup>
+</Project>
