@@ -2,6 +2,14 @@
   "name": "HelloIonic",
   "private": "true",
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.0.0-beta.10"
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.10",
+    "angular-mocks": "~1.2.21"
+  },
+  "dependencies": {
+    "angular-http-auth": "~1.2.1",
+    "angular-resource": "~1.2.21",
+    "angular-local-storage": "~0.0.5",
+    "restangular": "~1.4.0",
+    "angular-facebook": "~0.2.2"
   }
 }

@@ -1,0 +1,10 @@
+﻿<ion-view title="Addresses">
+  <ion-content class="has-header">
+  <h1>addresses</h1>
+    <ion-list>
+      <ion-item ng-repeat="address in addresses" type="item-text-wrap" href="#/tab/address/{{address.id}}">
+        {{address.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

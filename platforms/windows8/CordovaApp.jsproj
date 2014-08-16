@@ -99,6 +99,141 @@ Powershell -ExecutionPolicy RemoteSigned Unblock-File '$(ProjectDir)\cordova\lib
         <Content Include="www\js\services.js" />
     </ItemGroup>
     <ItemGroup>
+        <Content Include="www\lib\angular\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular\angular-csp.css" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular\angular.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular\angular.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular\angular.min.js.gzip" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular\angular.min.js.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-animate\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-animate\angular-animate.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-animate\angular-animate.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-animate\angular-animate.min.js.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-animate\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-animate\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-mocks\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-mocks\angular-mocks.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-mocks\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-mocks\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-sanitize\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-sanitize\angular-sanitize.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-sanitize\angular-sanitize.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-sanitize\angular-sanitize.min.js.map" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-sanitize\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-sanitize\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\CHANGELOG.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\LICENSE" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\README.md" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\release\angular-ui-router.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\release\angular-ui-router.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\common.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\compat.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\resolve.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\state.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\stateDirectives.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\stateFilters.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\templateFactory.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\urlMatcherFactory.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\urlRouter.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\view.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\viewDirective.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\angular-ui-router\src\viewScroll.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\.bower.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\bower.json" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\lib\ionic\css\ionic.css" />
     </ItemGroup>
     <ItemGroup>
@@ -117,36 +252,6 @@ Powershell -ExecutionPolicy RemoteSigned Unblock-File '$(ProjectDir)\cordova\lib
         <Content Include="www\lib\ionic\fonts\ionicons.woff" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular\angular-animate.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular\angular-animate.min.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular\angular-resource.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular\angular-resource.min.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular\angular-sanitize.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular\angular-sanitize.min.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular\angular.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular\angular.min.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular-ui\angular-ui-router.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\lib\ionic\js\angular-ui\angular-ui-router.min.js" />
-    </ItemGroup>
-    <ItemGroup>
         <Content Include="www\lib\ionic\js\ionic-angular.js" />
     </ItemGroup>
     <ItemGroup>
@@ -163,6 +268,9 @@ Powershell -ExecutionPolicy RemoteSigned Unblock-File '$(ProjectDir)\cordova\lib
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\lib\ionic\js\ionic.min.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\lib\ionic\README.md" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\lib\ionic\scss\ionic.scss" />
@@ -276,9 +384,6 @@ Powershell -ExecutionPolicy RemoteSigned Unblock-File '$(ProjectDir)\cordova\lib
         <Content Include="www\lib\ionic\scss\_variables.scss" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="www\lib\ionic\version.json" />
-    </ItemGroup>
-    <ItemGroup>
         <Content Include="www\plugins\com.ionic.keyboard\www\keyboard.js" />
     </ItemGroup>
     <ItemGroup>
@@ -297,16 +402,16 @@ Powershell -ExecutionPolicy RemoteSigned Unblock-File '$(ProjectDir)\cordova\lib
         <Content Include="www\README.md" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="www\templates\friend-detail.html" />
+        <Content Include="www\templates\address-detail.html" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="www\templates\tab-account.html" />
+        <Content Include="www\templates\tab-addresses.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\templates\tab-card.html" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\templates\tab-dash.html" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\templates\tab-friends.html" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\templates\tabs.html" />

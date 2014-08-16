@@ -3,11 +3,11 @@
 /**
  * A simple example service that returns some data.
  */
-.factory('Friends', function() {
+.factory('Addresses', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  var friends = [
+  var addresses = [
     { id: 0, name: 'Scruff McGruff' },
     { id: 1, name: 'G.I. Joe' },
     { id: 2, name: 'Miss Frizzle' },
@@ -16,11 +16,11 @@
 
   return {
     all: function() {
-      return friends;
+      return addresses;
     },
-    get: function(friendId) {
+    get: function(addressId) {
       // Simple index lookup
-      return friends[friendId];
+      return addresses[addressId];
     }
   }
 });

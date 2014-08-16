@@ -28,9 +28,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
     // setup an abstract state for the tabs directive
-    .state('tab', {
+    .state('app', {
       url: "/tab",
       abstract: true,
       templateUrl: "templates/tabs.html"
@@ -38,7 +37,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     // Each tab has its own nav history stack:
 
-    .state('tab.dash', {
+    .state('app.dash', {
       url: '/dash',
       views: {
         'tab-dash': {
@@ -48,37 +47,37 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-    .state('tab.friends', {
-      url: '/friends',
+    .state('app.card', {
+      url: '/card',
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
-        }
-      }
-    })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
-        }
-      }
-    })
-
-    .state('tab.account', {
-      url: '/account',
-      views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
+        'tab-card': {
+          templateUrl: 'templates/tab-card.html',
           controller: 'AccountCtrl'
         }
       }
     })
 
+   .state('app.addresses', {
+      url: '/addresses',
+      views: {
+        'tab-addresses': {
+          templateUrl: 'templates/tab-addresses.html',
+          controller: 'AddressesCtrl'
+        }
+      }
+    })
+
+    .state('app.address-detail', {
+      url: '/address/:addressId',
+      views: {
+        'tab-addresses': {
+          templateUrl: 'templates/address-detail.html',
+          controller: 'AddressDetailCtrl'
+        }
+      }
+    })
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/app/dash');
 
 });
 

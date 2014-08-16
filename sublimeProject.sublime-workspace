@@ -3,18 +3,87 @@
 	{
 		"selected_items":
 		[
+			[
+				"password",
+				"passwordMatch"
+			],
+			[
+				"header",
+				"headersGetter"
+			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "\n	\"auto_complete\":\n	{\n		\"selected_items\":\n		[\n		]\n	},\n	\"buffers\":\n	[\n	],\n	\"build_system\": \"\",\n	\"command_palette\":\n	{\n		\"height\": 0.0,\n		\"selected_items\":\n		[\n		],\n		\"width\": 0.0\n	},\n	\"console\":\n	{\n		\"height\": 0.0\n	},\n	\"distraction_free\":\n	{\n		\"menu_visible\": true,\n		\"show_minimap\": false,\n		\"show_open_files\": false,\n		\"show_tabs\": false,\n		\"side_bar_visible\": false,\n		\"status_bar_visible\": false\n	},\n	\"file_history\":\n	[\n		\"/C/Users/pgrue_000/xcards/package.json\"\n	],\n	\"find\":\n	{\n		\"height\": 34.0\n	},\n	\"find_in_files\":\n	{\n		\"height\": 0.0,\n		\"where_history\":\n		[\n		]\n	},\n	\"find_state\":\n	{\n		\"case_sensitive\": false,\n		\"find_history\":\n		[\n		],\n		\"highlight\": true,\n		\"in_selection\": false,\n		\"preserve_case\": false,\n		\"regex\": false,\n		\"replace_history\":\n		[\n		],\n		\"reverse\": false,\n		\"show_context\": true,\n		\"use_buffer2\": true,\n		\"whole_word\": false,\n		\"wrap\": true\n	},\n	\"groups\":\n	[\n		{\n			\"sheets\":\n			[\n			]\n		}\n	],\n	\"incremental_find\":\n	{\n		\"height\": 0.0\n	},\n	\"input\":\n	{\n		\"height\": 0.0\n	},\n	\"layout\":\n	{\n		\"cells\":\n		[\n			[\n				0,\n				0,\n				1,\n				1\n			]\n		],\n		\"cols\":\n		[\n			0.0,\n			1.0\n		],\n		\"rows\":\n		[\n			0.0,\n			1.0\n		]\n	},\n	\"menu_visible\": true,\n	\"replace\":\n	{\n		\"height\": 0.0\n	},\n	\"save_all_on_build\": true,\n	\"select_file\":\n	{\n		\"height\": 0.0,\n		\"selected_items\":\n		[\n		],\n		\"width\": 0.0\n	},\n	\"select_project\":\n	{\n		\"height\": 0.0,\n		\"selected_items\":\n		[\n		],\n		\"width\": 0.0\n	},\n	\"show_minimap\": true,\n	\"show_open_files\": false,\n	\"show_tabs\": true,\n	\"side_bar_visible\": true,\n	\"side_bar_width\": 150.0,\n	\"status_bar_visible\": true\n}\n",
-			"file": "ionic.sublime-workspace",
-			"file_size": 1552,
-			"file_write_time": 130509427122019720,
+			"file": "www/js/app.js",
 			"settings":
 			{
-				"buffer_size": 1551,
+				"buffer_size": 4485,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/js/controllers.js",
+			"settings":
+			{
+				"buffer_size": 4585,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/js/directives.js",
+			"settings":
+			{
+				"buffer_size": 819,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "www/templates/register.html",
+			"settings":
+			{
+				"buffer_size": 2641,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "www/js/services.js",
+			"settings":
+			{
+				"buffer_size": 6936,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/templates/address-create.html",
+			"settings":
+			{
+				"buffer_size": 576,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "www/lib/angular-local-storage/angular-local-storage.js",
+			"settings":
+			{
+				"buffer_size": 13029,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "www/templates/login.html",
+			"settings":
+			{
+				"buffer_size": 1140,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "www/index.html",
+			"settings":
+			{
+				"buffer_size": 1795,
 				"line_ending": "Unix"
 			}
 		}
@@ -43,11 +112,43 @@
 	},
 	"file_history":
 	[
-		"/C/Users/pgrue_000/xcards/package.json"
+		"/C/Users/pgrue_000/xcards/www/templates/tab-addresses.html",
+		"/C/Users/pgrue_000/xcards/www/index.html",
+		"/C/Users/pgrue_000/xcards/www/templates/address-detail.html",
+		"/C/Users/pgrue_000/xcards/www/templates/address-edit.html",
+		"/C/Users/pgrue_000/xcards/www/js/app.js",
+		"/C/Users/pgrue_000/xcards/www/templates/login.html",
+		"/C/Users/pgrue_000/xcards/bower.json",
+		"/C/Users/pgrue_000/xcards/www/lib/lodash/dist/lodash.js",
+		"/C/Users/pgrue_000/xcards/www/js/services.js",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-resource/angular-resource.js",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-local-storage/angular-local-storage.js",
+		"/C/Users/pgrue_000/xcards/www/lib/restangular/karma.conf.js",
+		"/C/Users/pgrue_000/xcards/www/templates/tab-dash.html",
+		"/C/Users/pgrue_000/xcards/www/templates/tabs.html",
+		"/C/Users/pgrue_000/xcards/www/templates/share.html",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-http-auth/src/http-auth-interceptor.js",
+		"/C/Users/pgrue_000/xcards/www/lib/angular/angular.js",
+		"/C/Users/pgrue_000/xcards/www/templates/tab-card.html",
+		"/C/Users/pgrue_000/AppData/Roaming/Sublime Text 2/Packages/Color Scheme - Default/Monokai.tmTheme",
+		"/C/Users/pgrue_000/xcards/www/templates/menu.html",
+		"/C/Users/pgrue_000/xcards/test/karma.conf.js",
+		"/C/Users/pgrue_000/xcards/www/js/controllers.js",
+		"/C/Users/pgrue_000/xcards/test/unit/controllersSpec.js",
+		"/C/Users/pgrue_000/xcards/package.json",
+		"/C/Users/pgrue_000/xcards/ionic.project",
+		"/C/Users/pgrue_000/xcards/test/protractor-conf.js",
+		"/C/Users/pgrue_000/xcards/test/unit/servicesSpec.js",
+		"/C/Users/pgrue_000/xcards/Gruntfile.js",
+		"/C/Users/pgrue_000/xcards/www/css/ionic.app.css",
+		"/C/Users/pgrue_000/xcards/scss/ionic.app.scss",
+		"/C/Users/pgrue_000/xcards/www/.gitignore",
+		"/C/Users/pgrue_000/xcards/sublimeProject.sublime-workspace",
+		"/C/Users/pgrue_000/xcards/ionic.sublime-workspace"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
@@ -61,6 +162,42 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"User",
+			"UserService",
+			"loginModal",
+			"destroy",
+			"saveUser",
+			"getUser",
+			"saveUser",
+			"getUser",
+			"localStorage",
+			"ctrl",
+			"apctrl",
+			"loginModal",
+			"getUser",
+			"self",
+			"this",
+			"param",
+			"$http",
+			"$resource",
+			"resource",
+			"storage",
+			"log",
+			"login",
+			"resource",
+			"success",
+			"config",
+			"updater",
+			"configupdater",
+			"header",
+			"get",
+			"friend",
+			"friends",
+			"sideMenu",
+			"angular",
+			"stable",
+			"2C3E50",
+			"royal"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -78,14 +215,181 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "ionic.sublime-workspace",
+					"file": "www/js/app.js",
 					"settings":
 					{
-						"buffer_size": 1551,
+						"buffer_size": 4485,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								464,
+								464
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "www/js/controllers.js",
+					"settings":
+					{
+						"buffer_size": 4585,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								41,
+								41
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "www/js/directives.js",
+					"settings":
+					{
+						"buffer_size": 819,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								819,
+								819
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "www/templates/register.html",
+					"settings":
+					{
+						"buffer_size": 2641,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1950,
+								1950
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "www/js/services.js",
+					"settings":
+					{
+						"buffer_size": 6936,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								438,
+								438
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 120.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "www/templates/address-create.html",
+					"settings":
+					{
+						"buffer_size": 576,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								33,
+								33
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "www/lib/angular-local-storage/angular-local-storage.js",
+					"settings":
+					{
+						"buffer_size": 13029,
 						"regions":
 						{
 						},
@@ -98,11 +402,68 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "www/templates/login.html",
+					"settings":
+					{
+						"buffer_size": 1140,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1066,
+								1066
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "www/index.html",
+					"settings":
+					{
+						"buffer_size": 1795,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1177,
+								1177
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 240.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -116,7 +477,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 31.0
 	},
 	"layout":
 	{
@@ -151,6 +512,22 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"direc",
+				"www/js/directives.js"
+			],
+			[
+				"login.",
+				"www/templates/login.html"
+			],
+			[
+				"www/ind",
+				"www/index.html"
+			],
+			[
+				"www",
+				"www/index.html"
+			]
 		],
 		"width": 0.0
 	},
@@ -166,6 +543,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 202.0,
+	"side_bar_width": 251.0,
 	"status_bar_visible": true
 }

@@ -5,7 +5,14 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', 
+  ['ionic', 
+  'starter.controllers', 
+  'starter.services', 
+  'starter.directives',
+  'restangular',
+  'LocalStorageModule',
+  'facebook'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -20,7 +27,29 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   });
 })
-
+.constant('API',{
+  'domain':'http://paulgruenbacher.com/xcards'
+})
+.config(function(FacebookProvider) {
+     // Set your appId through the setAppId method or
+     // use the shortcut in the initialize method directly.
+     FacebookProvider.init('749099631795399');
+     FacebookProvider.setPermissions({
+      scope:'email'
+     });
+     console.log('provider',FacebookProvider);
+})
+.config(function(RestangularProvider){
+  RestangularProvider.setBaseUrl('http://paulgruenbacher.com/xcards/mobile');
+  //RestangularProvider.setDefaultHttpFields({cache: true});
+})
+.config(['$httpProvider', function($httpProvider) {
+        // Use x-www-form-urlencoded Content-Type
+       $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+       $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+       delete $httpProvider.defaults.headers.common['X-Requested-With'];
+      }
+])
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -28,17 +57,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
     // setup an abstract state for the tabs directive
-    .state('tab', {
+    .state('app', {
       url: "/tab",
       abstract: true,
-      templateUrl: "templates/tabs.html"
+      templateUrl: "templates/tabs.html",
+      controller: 'AppCtrl'
+    })
+
+    .state('app.logout', {
+      url: "/logout",
+      views: {
+        'tab-dash' : {
+         controller: "LogoutCtrl"
+        }
+      } 
     })
 
     // Each tab has its own nav history stack:
 
-    .state('tab.dash', {
+    .state('app.dash', {
       url: '/dash',
       views: {
         'tab-dash': {
@@ -47,38 +85,75 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-
-    .state('tab.friends', {
-      url: '/friends',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
+    .state('app.share',{
+      url:'/share',
+      views:{
+        'tab-dash':{
+          templateUrl:'templates/share.html',
+          controller: 'ShareCtrl'
         }
       }
     })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
+    .state('app.card', {
+      url: '/card',
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
+        'tab-card': {
+          templateUrl: 'templates/tab-card.html',
+          controller: 'CardCtrl'
         }
       }
     })
-
-    .state('tab.account', {
-      url: '/account',
+   .state('app.addresses', {
+      url: '/addresses',
       views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
+        'tab-addresses': {
+          templateUrl: 'templates/tab-addresses.html',
+          controller: 'AddressesCtrl'
         }
       }
     })
-
+    .state('app.address-create', {
+      url: '/create',
+      views: {
+        'tab-addresses': {
+          templateUrl: 'templates/address-create.html',
+          controller: 'AddressCreateCtrl'
+        }
+      }
+    })
+    .state('app.address-detail', {
+      url: '/address/:addressId',
+      views: {
+        'tab-addresses': {
+          templateUrl: 'templates/address-detail.html',
+          controller: 'AddressDetailCtrl'
+        }
+      }
+    })
+    .state('app.address-edit', {
+      url: '/edit/:addressId',
+      views:{
+        'tab-addresses':{
+          templateUrl: 'templates/address-edit.html',
+          controller: 'AddressEditCtrl',
+        }
+      }
+    })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
+})
+.run(function($rootScope, $http, $injector,$state, AuthenticationService,ParamService) {
+    $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
+        var access_token=AuthenticationService.getAccessToken();
+        if (access_token){
+          headersGetter()['Authorization'] = "Bearer "+ access_token;
+          console.log('access_token',access_token);
+        }
+        if (data) {;
+          console.log('request transformed');
+          return angular.isObject(data) && String(data) !== '[object File]' ? ParamService.param(data) : data;
+        }
+    };
 });
 

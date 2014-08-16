@@ -39,6 +39,8 @@ C:\Users\pgrue_000\xcards\platforms\android\assets\www\lib \
 C:\Users\pgrue_000\xcards\platforms\android\assets\www\plugins \
 C:\Users\pgrue_000\xcards\platforms\android\assets\www\README.md \
 C:\Users\pgrue_000\xcards\platforms\android\assets\www\templates \
+C:\Users\pgrue_000\xcards\platforms\android\assets\www\css\ionic.app.css \
+C:\Users\pgrue_000\xcards\platforms\android\assets\www\css\ionic.app.min.css \
 C:\Users\pgrue_000\xcards\platforms\android\assets\www\css\style.css \
 C:\Users\pgrue_000\xcards\platforms\android\assets\www\img\ionic.png \
 C:\Users\pgrue_000\xcards\platforms\android\assets\www\js\app.js \
