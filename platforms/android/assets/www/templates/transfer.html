@@ -1,0 +1,16 @@
+<ion-view title="Share stuff">
+  <ion-content class="has-header">
+	<div class="list">
+		<p>recipient: {{recipient.user.addressee}}</p>
+		<p>email: {{recipient.user.email}}</p>
+		<ion-list>
+	      <ion-item ng-repeat="address in addresses" type="item-text-wrap">
+	        {{address.addressee}}, {{address.address}}
+	      </ion-item>
+	    </ion-list>
+    </div>
+	<div class="button button-positive button-save">
+		Save
+	</div>
+	</ion-content>
+</ion-view>

@@ -12,6 +12,7 @@ angular.module('starter',
   'starter.directives',
   'restangular',
   'LocalStorageModule',
+  'ngCordova',
   'facebook'])
 
 .run(function($ionicPlatform) {
@@ -91,6 +92,15 @@ angular.module('starter',
         'tab-dash':{
           templateUrl:'templates/share.html',
           controller: 'ShareCtrl'
+        }
+      }
+    })
+    .state('app.transfer',{
+      url:'/recipient/:recipientId',
+      views:{
+        'tab-dash':{
+          templateUrl:'templates/transfer.html',
+          controller: 'TransferCtrl'
         }
       }
     })

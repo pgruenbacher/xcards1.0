@@ -4,7 +4,22 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "package.appxmanifest": {
+                "parents": {
+                    "/Package/Capabilities": [
+                        {
+                            "xml": "<Capability Name=\"picturesLibrary\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<DeviceCapability Name=\"webcam\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
     },
     "installed_plugins": {
         "com.ionic.keyboard": {
@@ -14,6 +29,9 @@
             "PACKAGE_NAME": "xcards"
         },
         "org.apache.cordova.device": {
+            "PACKAGE_NAME": "xcards"
+        },
+        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "xcards"
         }
     },

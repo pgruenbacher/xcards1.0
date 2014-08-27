@@ -72,9 +72,6 @@ Powershell -ExecutionPolicy RemoteSigned Unblock-File '$(ProjectDir)\cordova\lib
         <Content Include="www\cordova.js" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="www\cordova_plugins.js" />
-    </ItemGroup>
-    <ItemGroup>
         <Content Include="www\css\ionic.app.css" />
     </ItemGroup>
     <ItemGroup>
@@ -384,21 +381,6 @@ Powershell -ExecutionPolicy RemoteSigned Unblock-File '$(ProjectDir)\cordova\lib
         <Content Include="www\lib\ionic\scss\_variables.scss" />
     </ItemGroup>
     <ItemGroup>
-        <Content Include="www\plugins\com.ionic.keyboard\www\keyboard.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\plugins\org.apache.cordova.console\www\console-via-logger.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\plugins\org.apache.cordova.console\www\logger.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\plugins\org.apache.cordova.device\src\windows8\DeviceProxy.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="www\plugins\org.apache.cordova.device\www\device.js" />
-    </ItemGroup>
-    <ItemGroup>
         <Content Include="www\README.md" />
     </ItemGroup>
     <ItemGroup>
@@ -415,5 +397,38 @@ Powershell -ExecutionPolicy RemoteSigned Unblock-File '$(ProjectDir)\cordova\lib
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\templates\tabs.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.ionic.keyboard\www\keyboard.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.console\www\logger.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.console\www\console-via-logger.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.device\www\device.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.device\src\windows8\DeviceProxy.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.camera\www\CameraConstants.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.camera\www\CameraPopoverOptions.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.camera\www\Camera.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.camera\www\CameraPopoverHandle.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\org.apache.cordova.camera\src\windows8\CameraProxy.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\cordova_plugins.js" />
     </ItemGroup>
 </Project>

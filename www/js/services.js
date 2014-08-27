@@ -7,28 +7,120 @@ angular.module('starter.services', ['http-auth-interceptor'])
   var user=null;
   return{
     me:function(){
-      Facebook.api('/me', function(response) {
-        console.log('fb user',response);
-        user=response;
+      return Facebook.api('/me', function(response) {
       });
-      return user;
     }
   }
 })
-.factory('UserService',function($http,Restangular){
+.factory('TransferService',function(Restangular,UserService,CacheAndCall){
+  //transfers structure
+  /*var transfers=[{
+    recipient:null,
+    credits:null,
+    addresses:null,
+  }];*/
+  var transfers=[];
+  var transferAPI=Restangular.all('transferAPI');
+  return {
+    all:function(callback){
+      CacheAndCall.getCacheList(transferAPI, {}, function (value) {
+        console.log(value);
+        callback(value);
+      });
+    },
+    get:function(id){
+      return transfers[id];
+    },
+    create:function(transfer){
+      return transferAPI.post(transfer);
+    },
+    check:function(user){
+      if(user.email){
+        return UserService.find(user.email);
+      }
+    },
+    saveRecipient:function(recipient,optionalId){
+      optionalId=optionalId || false;
+      if(optionalId){
+        transfers[optionalId].recipient=recipient;
+        return optionalId;
+      }
+      return transfers.push({recipient:recipient})-1; //need to return index not length
+    },
+    verifyRecipient:function(recipient){
+      var valid =false,
+        emails=0, numbers=0,
+        phoneRegex=/^(?:\([2-9]\d{2}\)\ ?|[2-9]\d{2}(?:\-?|\ ?))[2-9]\d{2}[- ]?\d{4}$/,
+        emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if(typeof recipient.emails !== 'undefined'){
+        for(i=0; i<recipient.emails.length; i++){
+          if(emailRegex.test(recipient.emails[i].value)){
+            recipient.emails[i].verified=true;
+            valid++;
+            emails++;
+          }
+        }
+      }
+      if(typeof recipient.phoneNumbers !== 'undefined'){
+        for(i=0; i<recipient.phoneNumbers.length; i++){
+          if(phoneRegex.test(recipient.phoneNumbers[i].value)){
+            console.log('phoneRegex',true,recipient.phoneNumbers[i].value);
+            recipient.phoneNumbers[i].verified=true;
+            console.log(recipient.phoneNumbers[i].value);
+            valid++;
+            numbers++;
+          }
+        }
+      }
+      return {status:valid,numbers:numbers,emails:emails};
+    },
+    findPreferred: function(path){
+      if(typeof path !== 'undefined'){
+        for(i=0; i<path.length; i++){
+          if(path[i].pref){
+            return path[i].value;
+          }
+        }
+      }
+      return null;
+    },
+    findVerified:function(path){
+      if(typeof path !== 'undefined'){
+        for(i=0; i<path.length; i++){
+          if(path[i].verified){
+            return path[i].value;
+          }
+        }
+      }
+      return null;
+    },
+    findPrefOrVerified:function(path){
+      var self=this;
+      var value=value=self.findPreferred(path)||self.findVerified(path);
+      return value;
+    }
+  }
+})
+.factory('UserService',function($http,Restangular,localStorageService){
   var user;
   var userAPI=Restangular.all('userAPI');
   return{
     authenticate:function(){
       Restangular.all('user/auth').getList().then(function(response){
-        console.log(response);
-
+        localStorageService.set('AuthUser',response[0]);
+        return response[0];
       },function(response){
         console.log(response);
       })
     },
-    get:function(){
-
+    user:function(){
+      return localStorageService.get('AuthUser');
+    },
+    get:function(id){
+      return userAPI.get(id);
+    },
+    find:function(email){
+      return userAPI.get("find", {"filter": email, "where":"email"});
     },
     create: function(user){
       return userAPI.post(user);
@@ -75,6 +167,7 @@ angular.module('starter.services', ['http-auth-interceptor'])
   return service = {
     login: function(user) {
       var self=this;
+      console.log('login');
       var token_request=Restangular.oneUrl('oauth/access_token');
       token_request.get({
         username:user.email,
@@ -82,12 +175,11 @@ angular.module('starter.services', ['http-auth-interceptor'])
         grant_type:'password',
         scope:'test_scope',
         client_id:'123456',
-        client_secret:'123456',
-        facebook_id:user.facebook_id
+        client_secret:'123456'
       }).then(
       function(data,status,headers,config){
         console.log('login response',data);
-        if(self.saveUser(user)){
+        if(self.saveAuthentication(user)){
           console.log('saved user, saved authentication token');
         }else{
           console.log('failed to save user');
@@ -111,27 +203,25 @@ angular.module('starter.services', ['http-auth-interceptor'])
       });
     },
     logout: function(user) {
-      $http.post('https://logout', {}, { ignoreAuthModule: true })
-      .finally(function(data) {
-        delete $http.defaults.headers.common.Authorization;
-        $rootScope.$broadcast('event:auth-logout-complete');
-      });     
+      if(localStorageService.remove('access_token')&&localStorageService.remove('authentication')){
+              $rootScope.$broadcast('event:auth-logout-complete');  
+      }
     },  
     loginCancelled: function() {
       authService.loginCancelled();
     },
-    saveUser:function(user){
-      var stored=localStorageService.set('user',user);
+    saveAuthentication:function(authentication){
+      var stored=localStorageService.set('authentication',authentication);
       if(stored){
         return true;
       }else{
         return false;
       }
     },
-    getUser:function(){
-      user=localStorageService.get('user');
-      if(user){
-        return user;
+    getAuthentication:function(){
+      authentication=localStorageService.get('authentication');
+      if(authentication){
+        return authentication;
       }else{
         return false;
       }
@@ -142,16 +232,21 @@ angular.module('starter.services', ['http-auth-interceptor'])
 
   };
 })
-.factory('ParamService',function(){
+.factory('ParamService',function($filter){
   /**
          * The workhorse; converts an object to x-www-form-urlencoded serialization.
          * @param {Object} obj
          * @return {String}
          */
       return {
+        fixedEncodeURI:function (str) {
+          return encodeURIComponent(str).replace(/%5B/g, '%7B').replace(/%5D/g, '%7D');
+        },
         param : function(obj) {
           var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
-            
+          var param=this.param; 
+          var self=this;
+          console.log('transform request',obj,query);
           for(name in obj) {
             value = obj[name];
               
@@ -161,7 +256,9 @@ angular.module('starter.services', ['http-auth-interceptor'])
                 fullSubName = name + '[' + i + ']';
                 innerObj = {};
                 innerObj[fullSubName] = subValue;
-                query += param(innerObj) + '&';
+                if(innerObj[fullSubName] !== undefined && innerObj[fullSubName] !== null){
+                  query += self.param(innerObj) + '&';
+                }
               }
             }
             else if(value instanceof Object) {
@@ -170,18 +267,22 @@ angular.module('starter.services', ['http-auth-interceptor'])
                 fullSubName = name + '[' + subName + ']';
                 innerObj = {};
                 innerObj[fullSubName] = subValue;
-                query += param(innerObj) + '&';
+                if(innerObj[fullSubName] !== undefined && innerObj[fullSubName] !== null){
+                  query += self.param(innerObj) + '&';
+                }
               }
             }
-            else if(value !== undefined && value !== null)
-              query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+            else if(value !== undefined && value !== null){
+              query += self.fixedEncodeURI(name) + '=' + self.fixedEncodeURI(value) + '&';
+            }
           }
-            
+          console.log('transform completed',query);
           return query.length ? query.substr(0, query.length - 1) : query;
         }
       } 
 })
 .factory('CacheAndCall',function($q){
+  //See https://github.com/mgonto/restangular/issues/349 for reference
   return {
     getCache: function (type, restangularObj, options, cacheCallback) {
       var cache_key = restangularObj.getRestangularUrl() + JSON.stringify(options);
@@ -235,3 +336,51 @@ angular.module('starter.services', ['http-auth-interceptor'])
     }
   };
 }])
+.factory('HelperService', function(){
+  return{
+    alphabetize: function(input,item) {
+      self=this;
+      self.sortBy(input,item);
+      var groups=[];
+      var groupValue='';
+      for(var i = 0; i < input.length; i++){
+        var contact = input[i];
+        if(self.deepFind(contact,item).substring(0,1) !== groupValue){
+          var group = {
+            label : self.deepFind(contact,item).substring(0,1),
+            contacts : []
+          };
+          groupValue = self.deepFind(contact,item).substring(0,1);
+          groups.push( group );
+        };
+        group.contacts.push(contact);
+      };
+    return groups;
+    },
+    sortBy: function ( collection, name ) { 
+      self=this;
+      collection.sort(
+        function( a, b ) {
+          if ( self.deepFind(a,name) <= self.deepFind(b,name) ) {
+            return( -1 );
+          }
+          return( 1 );
+        }
+      );
+    },
+    deepFind:function deepFind(obj, path) {
+      var paths = path.split('.')
+        , current = obj
+        , i;
+
+      for (i = 0; i < paths.length; ++i) {
+        if (current[paths[i]] == undefined) {
+          return undefined;
+        } else {
+          current = current[paths[i]];
+        }
+      }
+      return current;
+    }
+  }
+})

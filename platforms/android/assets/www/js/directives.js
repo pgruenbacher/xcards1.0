@@ -32,11 +32,13 @@ angular.module('starter.directives', [])
           scope.$apply(function() {
             element.addClass('ng-submitted');
             form.$submitted = true;
-            if (form.$valid) {
-              if (typeof fn === 'function') {
-                fn(scope, {$event: event});
+            $timeout(function(){
+              if (form.$valid && !form.$invalid) {
+                if (typeof fn === 'function') {
+                  fn(scope, {$event: event});
+                }
               }
-            }
+            },100); //100 ms delay to allow for other validator functions
           });
         });
       }

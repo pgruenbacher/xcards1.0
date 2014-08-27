@@ -2,7 +2,54 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope, UserService) {
   UserService.authenticate();
 })
-.controller('ShareCtrl',function($scope){
+.controller('ShareCtrl',function($scope,Addresses,$ionicModal,TransferService){
+  $scope.found=false;
+  Addresses.all(function(value){
+      $scope.addresses=value;
+    });
+  $ionicModal.fromTemplateUrl('templates/createModal.html', function(modal) {
+      $scope.createModal = modal;
+    },{scope: $scope,animation: 'slide-in-up',focusFirstInput: true});
+  $ionicModal.fromTemplateUrl('templates/importModal.html', function(modal) {
+      $scope.createModal = modal;
+    },{scope: $scope,animation: 'slide-in-up',focusFirstInput: true});
+})
+.controller('CreateUserCtrl',function($scope,$state,UserService,TransferService){
+  $scope.loading=false;
+  $scope.save=function(user,form){
+    var recipientId=TransferService.saveUser(user,false);
+    $scope.createModal.hide();
+    $state.go('app.transfer',{recipientId:recipientId});
+  };
+  $scope.check=function(email,form){
+    console.log('check',email);
+    $scope.loading=true;
+    form.createForm.$invalid=true;
+    var find=UserService.find(email).then(function(response){
+      $scope.loading=false;
+      console.log(response);
+      form.createForm.$invalid=false;
+      if(response.status=='found'){
+        $scope.found=true;
+        form.user.addressee=response.user.first+' '+response.user.last;
+      }else{
+        $scope.found=false;
+      }
+    },function(response){
+      $scope.loading=false;
+      console.log('error',response);
+      form.createForm.$invalid=false;
+    });
+    
+  };
+})
+.controller('TransferCtrl',function($scope,$state,$stateParams,Addresses,TransferService,UserService){
+  Addresses.all(function(value){
+    $scope.addresses=value;
+  });
+  console.log($stateParams.recipientId);
+  $scope.recipient=TransferService.get($stateParams.recipientId);
+  console.log($scope.recipient);
 })
 .controller('AddressesCtrl', function($scope, $state, Addresses) {
     //console.log(addresses);
@@ -103,14 +150,17 @@ angular.module('starter.controllers', [])
       
   // Defining user logged status
   $scope.logged = false;
-  $scope.login = function() {
-    AuthenticationService.login($scope.user);
+  $scope.login = function(user) {
+    console.log(user);
+    AuthenticationService.login(user);
   };
   $scope.facebook = function() {
     Facebook.getLoginStatus(function(response) {
+      console.log('facebook');
       if (response.status == 'connected') {
         $scope.logged = true;
-        FacebookService.me(); 
+        console.log(response);
+        $scope.fbLoginUser();
       }
       else
         $scope.fbLogin();
@@ -118,15 +168,22 @@ angular.module('starter.controllers', [])
   };
   //Include permissions object as second parameter
   $scope.fbLogin = function() {
-   Facebook.login(function(response) {
+    Facebook.login(function(response) {
       if (response.status == 'connected') {
         $scope.logged = true;
-        var user=FacebookService.me();
-        user.facebook_id=user.id;
-        user.password=user.id;
-        localStorageService.set('user',user);
+        $scope.fbLoginUser();
       }
     },Facebook.permissions());
+  };
+  $scope.fbLoginUser= function(){
+    FacebookService.me().then(function(response){
+      var user=response;
+      console.log('user',user);
+      user.facebook_id=user.id;
+      user.password='verified';
+      localStorageService.set('user',user);
+      AuthenticationService.login(user);
+    });
   };
   $scope.register= function(){
     $scope.registerModal.show();

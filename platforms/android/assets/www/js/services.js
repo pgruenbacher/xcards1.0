@@ -7,11 +7,39 @@ angular.module('starter.services', ['http-auth-interceptor'])
   var user=null;
   return{
     me:function(){
-      Facebook.api('/me', function(response) {
-        console.log('fb user',response);
-        user=response;
+      return Facebook.api('/me', function(response) {
       });
-      return user;
+    }
+  }
+})
+.factory('TransferService',function(Restangular,UserService){
+  //transfers structure
+  /*var transfers=[{
+    user:null,
+    credits:null,
+    addresses:null
+  }];*/
+  var transfers=[];
+  var transferAPI=Restangular.all('transferAPI');
+  return {
+    create:function(transfer){
+      return transferAPI.post(transfer);
+    },
+    check:function(user){
+      if(user.email){
+        return UserService.find(user.email);
+      }
+    },
+    saveUser:function(user,optionalId){
+      optionalId=optionalId || false;
+      if(optionalId){
+        transfers[optionalId].user=user;
+        return optionalId;
+      }
+      return transfers.push({user:user})-1; //need to return index not length
+    },
+    get:function(id){
+      return transfers[id];
     }
   }
 })
@@ -27,8 +55,11 @@ angular.module('starter.services', ['http-auth-interceptor'])
         console.log(response);
       })
     },
-    get:function(){
-
+    get:function(id){
+      return userAPI.get(id);
+    },
+    find:function(email){
+      return userAPI.get("find", {"filter": email, "where":"email"});
     },
     create: function(user){
       return userAPI.post(user);
@@ -75,6 +106,7 @@ angular.module('starter.services', ['http-auth-interceptor'])
   return service = {
     login: function(user) {
       var self=this;
+      console.log('login');
       var token_request=Restangular.oneUrl('oauth/access_token');
       token_request.get({
         username:user.email,
@@ -82,8 +114,7 @@ angular.module('starter.services', ['http-auth-interceptor'])
         grant_type:'password',
         scope:'test_scope',
         client_id:'123456',
-        client_secret:'123456',
-        facebook_id:user.facebook_id
+        client_secret:'123456'
       }).then(
       function(data,status,headers,config){
         console.log('login response',data);

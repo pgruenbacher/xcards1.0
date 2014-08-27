@@ -12,6 +12,7 @@ angular.module('starter',
   'starter.directives',
   'restangular',
   'LocalStorageModule',
+  'ngCordova',
   'facebook'])
 
 .run(function($ionicPlatform) {
@@ -27,20 +28,16 @@ angular.module('starter',
     }
   });
 })
-.constant('API',{
-  'domain':'http://paulgruenbacher.com/xcards'
-})
+.constant('API',{'domain':'http://paulgruenbacher.com/xcards/mobile'})
+.constant('PERMISSIONS',{FbPermssions:{scope:'email'}})
 .config(function(FacebookProvider) {
      // Set your appId through the setAppId method or
      // use the shortcut in the initialize method directly.
      FacebookProvider.init('749099631795399');
-     FacebookProvider.setPermissions({
-      scope:'email'
-     });
      console.log('provider',FacebookProvider);
 })
-.config(function(RestangularProvider){
-  RestangularProvider.setBaseUrl('http://paulgruenbacher.com/xcards/mobile');
+.config(function(RestangularProvider,API){
+  RestangularProvider.setBaseUrl(API.domain);
   //RestangularProvider.setDefaultHttpFields({cache: true});
 })
 .config(['$httpProvider', function($httpProvider) {
@@ -91,6 +88,15 @@ angular.module('starter',
         'tab-dash':{
           templateUrl:'templates/share.html',
           controller: 'ShareCtrl'
+        }
+      }
+    })
+    .state('app.transfer',{
+      url:'/recipient/:recipientId',
+      views:{
+        'tab-dash':{
+          templateUrl:'templates/transfer.html',
+          controller: 'TransferCtrl'
         }
       }
     })
@@ -151,7 +157,6 @@ angular.module('starter',
           console.log('access_token',access_token);
         }
         if (data) {;
-          console.log('request transformed');
           return angular.isObject(data) && String(data) !== '[object File]' ? ParamService.param(data) : data;
         }
     };

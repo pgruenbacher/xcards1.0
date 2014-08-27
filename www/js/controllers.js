@@ -1,8 +1,199 @@
 angular.module('starter.controllers', [])
-.controller('DashCtrl', function($scope, UserService) {
+.controller('DashCtrl', function($scope, UserService,AuthenticationService,TransferService) {
   UserService.authenticate();
+  TransferService.all(function(transfers){
+    $scope.transfers=transfers;
+  });
+  $scope.logout=function(){
+    AuthenticationService.logout();
+  }
 })
-.controller('ShareCtrl',function($scope){
+.controller('ShareCtrl',function($scope, $state,Addresses,$ionicPopup,$ionicModal,TransferService){
+  $scope.transfer={recipient:{}};
+  $scope.found=false;
+  Addresses.all(function(value){
+      $scope.addresses=value;
+    });
+  $scope.saveContact=function(user){
+    var verified=TransferService.verifyRecipient(user);
+    if(verified.status>1&&(verified.emails>1||verified.numbers>1)){
+      $scope.transfer.recipient=user;
+      $scope.transfer.recipient.addressee=user.name.formatted;
+      $scope.preferenceModal.show();
+    }else if(verified.status==1){
+      $scope.importModal.hide();
+      $scope.save(user);
+    }else{
+      $scope.showInvalid();
+    }
+  };
+  $scope.showInvalid = function() {
+    var alertPopup = $ionicPopup.alert({
+      title: 'Invalid Contact',
+      template: 'Sorry, that contact has no valid contact information (email, number)'
+    });
+    alertPopup.then(function(res) {
+      console.log('Invalid');
+    });
+  };
+  $scope.save=function(user){
+    if(typeof user.addressee == 'undefined'){
+      user.addressee=user.name.formatted;
+    }
+    var recipientId=TransferService.saveRecipient(user,false);
+    $state.go('app.transfer',{recipientId:recipientId});
+  };
+  $ionicModal.fromTemplateUrl('templates/createModal.html', function(modal) {
+      $scope.createModal = modal;
+    },{scope: $scope,animation: 'slide-in-up',focusFirstInput: true});
+  $ionicModal.fromTemplateUrl('templates/importModal.html', function(modal) {
+      $scope.importModal = modal;
+    },{scope: $scope,animation: 'slide-in-up',focusFirstInput: true});
+  $ionicModal.fromTemplateUrl('templates/preferenceModal.html', function(modal) {
+      $scope.preferenceModal = modal;
+    },{scope: $scope,animation: 'slide-in-up',focusFirstInput: true});
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    console.log('destroy modal');
+    $scope.preferenceModal.remove();
+    $scope.importModal.remove();
+    $scope.createModal.remove();
+  });
+})
+.controller('ImportCtrl',function($scope, $cordovaContacts, HelperService,TransferService){
+  var contacts=$cordovaContacts.find({}).then(function(result){
+   $scope.groups=HelperService.alphabetize(result,'name.formatted');
+   $scope.search=' ';
+   console.log($scope.groups);
+  },function(result){
+    console.log('fail',result);
+  });
+})
+.controller('CreateUserCtrl',function($scope,$state,UserService,TransferService){
+  $scope.user={};
+  $scope.saveCreate=function(user){
+    user.emails=[{value:user.email}];
+    $scope.save(user);
+    $scope.createModal.hide();
+  }
+  $scope.loading=false;
+  $scope.check=function(email,form){
+    console.log('check',email);
+    $scope.loading=true;
+    form.createForm.$invalid=true;
+    var find=UserService.find(email).then(function(response){
+      $scope.loading=false;
+      console.log(response);
+      form.createForm.$invalid=false;
+      if(response.status=='found'){
+        $scope.found=true;
+        form.user.addressee=response.user.first+' '+response.user.last;
+      }else{
+        $scope.found=false;
+      }
+    },function(response){
+      $scope.loading=false;
+      console.log('error',response);
+      form.createForm.$invalid=false;
+    });
+  };
+})
+.controller('TransferCtrl',function($scope,$state,$stateParams,selectedFilter,UserService,Addresses,
+  $ionicPopup, BusyService,TransferService,$ionicModal,byIdFilter)
+{
+  Addresses.all(function(value){
+    $scope.addresses=value;
+  });
+  $scope.user={credits:UserService.user().credits};
+  $scope.transfer=TransferService.get($stateParams.recipientId);
+  $scope.transfer.credits=0;
+  $scope.transfer.addresses=[];
+  $scope.transfer.recipient.email=TransferService.findPrefOrVerified($scope.transfer.recipient.emails);
+  $scope.transfer.recipient.phoneNumber=TransferService.findPrefOrVerified($scope.transfer.recipient.phoneNumbers);
+  $scope.plus=function(){
+    $scope.transfer.credits++;
+  }
+  $scope.minus=function(){
+    $scope.transfer.credits--;
+  }
+  $scope.confirm=function(){
+    var credits=$scope.transfer.credits;
+    var addresses=selectedFilter($scope.addresses);
+    var recipient=$scope.transfer.recipient;
+    /*Take Confirmation*/
+    $scope.showPopup(credits,addresses,recipient).then(function(result){
+      console.log(result);
+      BusyService.show();
+      var addressIds=byIdFilter(addresses);
+      var recipientInfo={
+        addressee:recipient.addressee,
+        email:recipient.email,
+        phoneNumber:recipient.phoneNumber
+      };
+      /*Send TransferCreation*/
+      TransferService.create({
+        credits:credits,
+        addresses:addressIds,
+        recipient:recipientInfo
+      }).then(function(result){
+        console.log(result);
+        BusyService.hide();
+        $state.go('app.dash');
+      },function(result){
+        console.log('error',result);
+        BusyService.hide();
+      })
+    });;
+  }
+  $scope.showPopup = function(credits,addresses,recipient) {
+  $scope.data = {}
+  var html='<p>You will be sending:</p>'
+  +(credits > 0 ? '<p>'+ credits +' credits</p>':'')
+  +(addresses.length > 0 ? '<p>'+addresses.length+' addresses</p>':'')
+  +'<p>Click continue to go ahead...</p>';
+  // An elaborate, custom popup
+  var confirmPopup = $ionicPopup.confirm({
+    template: html,
+    title: 'Confirm Transfer',
+    subTitle: 'Please confirm',
+    buttons: [
+      { text: 'Cancel' },
+      {
+        text: '<b>Confirm</b>',
+        type: 'button-positive',
+        onTap: function(e) {
+          return 'hello';
+        }
+      },
+    ]
+  });
+  return confirmPopup;
+ };
+  $ionicModal.fromTemplateUrl('templates/addressesModal.html', function(modal) {
+      $scope.addressesModal = modal;
+    },{scope: $scope,animation: 'slide-in-up',focusFirstInput: true});
+})
+.controller('PreferenceCtrl',function($scope){
+  $scope.data={};
+  $scope.continue=function(){
+    var emailID=$scope.data.emailID,
+    numberID=$scope.data.numberID;
+    console.log(emailID,numberID);
+    var user=$scope.transfer.recipient;
+    if(typeof emailID !== 'undefined'){
+      user.emails[emailID].pref=true;
+    }
+    if(typeof numberID !== 'undefined'){
+      user.phoneNumbers[numberID].pref=true;
+    }
+    $scope.save(user);
+    $scope.preferenceModal.hide();
+  }
+})
+.controller('AddressesModalCtrl',function($scope){
+  $scope.toggle=function(address){
+    address.selected = !address.selected;
+  }
 })
 .controller('AddressesCtrl', function($scope, $state, Addresses) {
     //console.log(addresses);
@@ -96,21 +287,23 @@ angular.module('starter.controllers', [])
 
 })
 /*Login Controller */
-.controller('LoginCtrl', function($scope, $http, $ionicModal, $state, Facebook, FacebookService, AuthenticationService, localStorageService) {
+.controller('LoginCtrl', function($scope, $http, $ionicModal, $state, Facebook, PERMISSIONS, FacebookService, AuthenticationService, localStorageService) {
   $scope.message = "";
   // Define user empty data :/
   $scope.user = {};
       
   // Defining user logged status
   $scope.logged = false;
-  $scope.login = function() {
-    AuthenticationService.login($scope.user);
+  $scope.login = function(user) {
+    AuthenticationService.login(user);
   };
   $scope.facebook = function() {
     Facebook.getLoginStatus(function(response) {
+      console.log('facebook');
       if (response.status == 'connected') {
         $scope.logged = true;
-        FacebookService.me(); 
+        console.log(response);
+        $scope.fbLoginUser();
       }
       else
         $scope.fbLogin();
@@ -118,21 +311,28 @@ angular.module('starter.controllers', [])
   };
   //Include permissions object as second parameter
   $scope.fbLogin = function() {
-   Facebook.login(function(response) {
+    Facebook.login(function(response) {
       if (response.status == 'connected') {
         $scope.logged = true;
-        var user=FacebookService.me();
-        user.facebook_id=user.id;
-        user.password=user.id;
-        localStorageService.set('user',user);
+        $scope.fbLoginUser();
       }
-    },Facebook.permissions());
+    },PERMISSIONS.FbPermissions);
+  };
+  $scope.fbLoginUser= function(){
+    FacebookService.me().then(function(response){
+      var user=response;
+      console.log('user',user);
+      user.facebook_id=user.id;
+      user.password='verified';
+      AuthenticationService.saveAuthentication(user);
+      AuthenticationService.login(user);
+    });
   };
   $scope.register= function(){
     $scope.registerModal.show();
   };
   $scope.$on('event:auth-loginRequired', function(e, rejection) {
-  	$scope.user=AuthenticationService.getUser();
+  	$scope.user=AuthenticationService.getAuthentication();
   	if($scope.user.email && $scope.user.password){
   		AuthenticationService.login($scope.user);
   	}
@@ -198,6 +398,4 @@ angular.module('starter.controllers', [])
     
   }
 })
-.controller('LogoutCtrl', function($scope, AuthenticationService) {
-    AuthenticationService.logout();
-});
+

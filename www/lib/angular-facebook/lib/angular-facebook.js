@@ -33,19 +33,19 @@ provides: [facebook]
    * Facebook module
    */
   angular.module('facebook', []).
-    
+
     // Declare module settings value
     value('settings', settings).
-    
+
     // Declare module flags value
     value('flags', flags).
-    
+
     /**
      * Facebook provider
      */
     provider('Facebook', [
       function() {
-        
+
         /**
          * Facebook appId
          * @type {Number}
@@ -103,16 +103,7 @@ provides: [facebook]
         this.getChannel = function() {
           return settings.channelUrl;
         };
-        /*
-        *
-        *Set Permission parameters
-        */
-        this.setPermissions=function(permissions){
-          settings.permissions=permissions;
-        }
-        this.getPermissions = function(){
-          return settings.permissions;
-        }
+
         /**
          * Enable cookies to allow the server to access the session
          * @type {Boolean}
@@ -145,7 +136,6 @@ provides: [facebook]
          * Auth Response
          * @type {Object}
          */
-        settings.authResponse = true;
 
         this.setAuthResponse = function(obj) {
           settings.authResponse = obj || true;
@@ -211,7 +201,7 @@ provides: [facebook]
 
           return settings[key];
         };
-        
+
         /**
          * load SDK
          */
@@ -219,11 +209,24 @@ provides: [facebook]
 
         this.setLoadSDK = function(a) {
           settings.loadSDK = !!a;
-        }
-        
+        };
+
         this.getLoadSDK = function() {
           return settings.loadSDK;
-        }
+        };
+
+        /**
+         * SDK version
+         */
+        settings.version = 'v2.0';
+
+        this.setSdkVersion = function(version) {
+          settings.version = version;
+        };
+
+        this.getSdkVersion = function() {
+          return settings.version;
+        };
 
         /**
          * Init Facebook API required stuff
@@ -241,7 +244,7 @@ provides: [facebook]
           if (angular.isObject(initSettings)) {
             angular.extend(settings, initSettings);
           }
-          
+
           // Set if Facebook SDK should be loaded automatically or not.
           if (angular.isDefined(_loadSDK)) {
             settings.loadSDK = !!_loadSDK;
@@ -272,23 +275,13 @@ provides: [facebook]
               return flags.ready;
             };
 
-            /**
-             * Map some asynchronous Facebook sdk methods to NgFacebook
-             */
-            angular.forEach([
-              'login',
-              'logout',
-              'api',
-              'ui',
-              'getLoginStatus'
-            ], function(name) {
-              NgFacebook.prototype[name] = function() {
+            NgFacebook.prototype.login = function () {
 
-                var d = $q.defer(),
-                    args = Array.prototype.slice.call(arguments), // Converts arguments passed into an array
-                    userFn,
-                    userFnIndex;
-                
+              var d = $q.defer(),
+                  args = Array.prototype.slice.call(arguments),
+                  userFn,
+                  userFnIndex; // Converts arguments passed into an array
+
                 // Get user function and it's index in the arguments array, to replace it with custom function, allowing the usage of promises
                 angular.forEach(args, function(arg, index) {
                   if (angular.isFunction(arg)) {
@@ -314,7 +307,61 @@ provides: [facebook]
                     });
                   });
                 }
-                
+
+                if (this.isReady()) {
+                  $window.FB.login.apply($window.FB, args);
+                } else {
+                  $timeout(function() {
+                    d.reject("Facebook.login() called before Facebook SDK has loaded.");
+                  });
+                }
+
+                return d.promise;
+            };
+
+            /**
+             * Map some asynchronous Facebook sdk methods to NgFacebook
+             */
+            angular.forEach([
+              'logout',
+              'api',
+              'ui',
+              'getLoginStatus'
+            ], function(name) {
+              NgFacebook.prototype[name] = function() {
+
+                var d = $q.defer(),
+                    args = Array.prototype.slice.call(arguments), // Converts arguments passed into an array
+                    userFn,
+                    userFnIndex;
+
+                // Get user function and it's index in the arguments array, to replace it with custom function, allowing the usage of promises
+                angular.forEach(args, function(arg, index) {
+                  if (angular.isFunction(arg)) {
+                    userFn = arg;
+                    userFnIndex = index;
+                  }
+                });
+
+                // Replace user function intended to be passed to the Facebook API with a custom one
+                // for being able to use promises.
+                if (angular.isFunction(userFn) && angular.isNumber(userFnIndex)) {
+                  args.splice(userFnIndex, 1, function(response) {
+                    $timeout(function() {
+
+                      if (response && typeof response.error === 'undefined') {
+                        d.resolve(response);
+                      } else {
+                        d.reject(response);
+                      }
+
+                      if (angular.isFunction(userFn)) {
+                        userFn(response);
+                      }
+                    });
+                  });
+                }
+
                 $timeout(function() {
                   // Call when loadDeferred be resolved, meaning Service is ready to be used.
                   loadDeferred.promise.then(function() {
@@ -327,12 +374,7 @@ provides: [facebook]
                 return d.promise;
               };
             });
-            /*
-            * Get Facebook Permissions
-            */
-            NgFacebook.prototype.permissions=function(){
-              return settings.permissions;
-            }
+
             /**
              * Map Facebook sdk XFBML.parse() to NgFacebook.
              */
@@ -343,7 +385,7 @@ provides: [facebook]
               $timeout(function() {
                 // Call when loadDeferred be resolved, meaning Service is ready to be used
                 loadDeferred.promise.then(function() {
-                  $window.FB.parse();
+                  $window.FB.XFBML.parse();
                   d.resolve();
                 }, function() {
                   throw 'Facebook API could not be initialized properly';
@@ -363,7 +405,7 @@ provides: [facebook]
                   args = Array.prototype.slice.call(arguments), // Get arguments passed into an array
                   userFn,
                   userFnIndex;
-              
+
               // Get user function and it's index in the arguments array, to replace it with custom function, allowing the usage of promises
               angular.forEach(args, function(arg, index) {
                 if (angular.isFunction(arg)) {
@@ -377,7 +419,8 @@ provides: [facebook]
               if (angular.isFunction(userFn) && angular.isNumber(userFnIndex)) {
                 args.splice(userFnIndex, 1, function(response) {
                   $timeout(function() {
-                    if (angular.isUndefined(response.error)) {
+
+                    if (response && typeof response.error === 'undefined') {
                       d.resolve(response);
                     } else {
                       d.reject(response);
@@ -412,7 +455,7 @@ provides: [facebook]
                   args = Array.prototype.slice.call(arguments), // Get arguments passed into an array
                   userFn,
                   userFnIndex;
-              
+
               // Get user function and it's index in the arguments array, to replace it with custom function, allowing the usage of promises
               angular.forEach(args, function(arg, index) {
                 if (angular.isFunction(arg)) {
@@ -426,7 +469,8 @@ provides: [facebook]
               if (angular.isFunction(userFn) && angular.isNumber(userFnIndex)) {
                 args.splice(userFnIndex, 1, function(response) {
                   $timeout(function() {
-                    if (angular.isUndefined(response.error)) {
+
+                    if (response && typeof response.error === 'undefined') {
                       d.resolve(response);
                     } else {
                       d.reject(response);
@@ -472,10 +516,10 @@ provides: [facebook]
       function($rootScope, $q, $window, $timeout) {
         // Define global loadDeffered to notify when Service callbacks are safe to use
         loadDeferred = $q.defer();
-        
+
         var loadSDK = settings.loadSDK;
         delete(settings['loadSDK']); // Remove loadSDK from settings since this isn't part from Facebook API.
-        
+
         /**
          * Define fbAsyncInit required by Facebook API
          */
@@ -490,7 +534,7 @@ provides: [facebook]
 
             // Set ready global flag
             flags.ready = true;
-          
+
 
             /**
              * Subscribe to Facebook API events and broadcast through app.
@@ -519,7 +563,6 @@ provides: [facebook]
             $rootScope.$broadcast('Facebook:load');
 
             loadDeferred.resolve(FB);
-            
           });
         };
 
@@ -541,25 +584,26 @@ provides: [facebook]
         /**
          * SDK script injecting
          */
-        loadSDK && (function injectScript() {
-          var src           = '//connect.facebook.net/' + settings.locale + '/all.js',
-              script        = document.createElement('script');
-              script.id     = 'facebook-jssdk';
-              script.async  = true;
+         if(loadSDK) {
+          (function injectScript() {
+            var src           = '//connect.facebook.net/' + settings.locale + '/sdk.js',
+                script        = document.createElement('script');
+                script.id     = 'facebook-jssdk';
+                script.async  = true;
 
-          // Prefix protocol
-          if ($window.location.protocol === 'file') {
-            src = 'https:' + src;
-          }
+            // Prefix protocol
+            if (['file', 'file:'].indexOf($window.location.protocol) !== -1) {
+              src = 'https:' + src;
+            }
 
-          script.src = src;
-          script.onload = function() {
-            flags.sdk = true; // Set sdk global flag
-          };
+            script.src = src;
+            script.onload = function() {
+              flags.sdk = true; // Set sdk global flag
+            };
 
-          document.getElementsByTagName('head')[0].appendChild(script); // // Fix for IE < 9, and yet supported by lattest browsers
-        })();
-        
+            document.getElementsByTagName('head')[0].appendChild(script); // // Fix for IE < 9, and yet supported by lattest browsers
+          })();
+        }
       }
     ]);
 

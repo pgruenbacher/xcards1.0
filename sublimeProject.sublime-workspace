@@ -19,7 +19,7 @@
 			"file": "www/js/app.js",
 			"settings":
 			{
-				"buffer_size": 4485,
+				"buffer_size": 4976,
 				"line_ending": "Unix"
 			}
 		},
@@ -27,7 +27,7 @@
 			"file": "www/js/controllers.js",
 			"settings":
 			{
-				"buffer_size": 4585,
+				"buffer_size": 12845,
 				"line_ending": "Unix"
 			}
 		},
@@ -35,15 +35,7 @@
 			"file": "www/js/directives.js",
 			"settings":
 			{
-				"buffer_size": 819,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "www/templates/register.html",
-			"settings":
-			{
-				"buffer_size": 2641,
+				"buffer_size": 6914,
 				"line_ending": "Windows"
 			}
 		},
@@ -51,40 +43,40 @@
 			"file": "www/js/services.js",
 			"settings":
 			{
-				"buffer_size": 6936,
+				"buffer_size": 11912,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "www/templates/address-create.html",
+			"file": "www/templates/transfer.html",
 			"settings":
 			{
-				"buffer_size": 576,
+				"buffer_size": 1876,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "www/lib/angular-local-storage/angular-local-storage.js",
+			"file": "scss/ionic.app.scss",
 			"settings":
 			{
-				"buffer_size": 13029,
+				"buffer_size": 1522,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "www/templates/login.html",
+			"file": "www/cordova.mock.js",
 			"settings":
 			{
-				"buffer_size": 1140,
+				"buffer_size": 2338,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "www/index.html",
+			"file": "www/templates/preferenceModal.html",
 			"settings":
 			{
-				"buffer_size": 1795,
-				"line_ending": "Unix"
+				"buffer_size": 1759,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -112,43 +104,73 @@
 	},
 	"file_history":
 	[
-		"/C/Users/pgrue_000/xcards/www/templates/tab-addresses.html",
-		"/C/Users/pgrue_000/xcards/www/index.html",
-		"/C/Users/pgrue_000/xcards/www/templates/address-detail.html",
-		"/C/Users/pgrue_000/xcards/www/templates/address-edit.html",
-		"/C/Users/pgrue_000/xcards/www/js/app.js",
-		"/C/Users/pgrue_000/xcards/www/templates/login.html",
-		"/C/Users/pgrue_000/xcards/bower.json",
-		"/C/Users/pgrue_000/xcards/www/lib/lodash/dist/lodash.js",
-		"/C/Users/pgrue_000/xcards/www/js/services.js",
-		"/C/Users/pgrue_000/xcards/www/lib/angular-resource/angular-resource.js",
-		"/C/Users/pgrue_000/xcards/www/lib/angular-local-storage/angular-local-storage.js",
-		"/C/Users/pgrue_000/xcards/www/lib/restangular/karma.conf.js",
+		"/C/Users/pgrue_000/xcards/www/templates/addressesModal.html",
+		"/C/Users/pgrue_000/xcards/www/templates/importModal.html",
+		"/C/Users/pgrue_000/xcards/www/templates/createModal.html",
+		"/C/Users/pgrue_000/xcards/www/templates/register.html",
+		"/C/Users/pgrue_000/xcards/www/cordova.mock.js",
 		"/C/Users/pgrue_000/xcards/www/templates/tab-dash.html",
+		"/C/Users/pgrue_000/xcards/www/templates/preferenceModal.html",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-local-storage/bower.json",
+		"/C/Users/pgrue_000/xcards/www/index.html",
 		"/C/Users/pgrue_000/xcards/www/templates/tabs.html",
 		"/C/Users/pgrue_000/xcards/www/templates/share.html",
-		"/C/Users/pgrue_000/xcards/www/lib/angular-http-auth/src/http-auth-interceptor.js",
+		"/C/Users/pgrue_000/xcards/www/templates/login.html",
+		"/C/Users/pgrue_000/xcards/scss/ionic.app.scss",
+		"/C/Users/pgrue_000/xcards/www/lib/ionic/scss/_items.scss",
+		"/C/Users/pgrue_000/xcards/www/lib/ionic/scss/_select.scss",
+		"/C/Users/pgrue_000/xcards/www/templates/tab-addresses.html",
+		"/C/Users/pgrue_000/xcards/www/templates/transfer.html",
+		"/C/Users/pgrue_000/xcards/www/lib/ngCordova/dist/ng-cordova.js",
+		"/C/Users/pgrue_000/xcards/bower.json",
+		"/C/Users/pgrue_000/xcards/www/lib/ngCordova/.bower.json",
+		"/C/Users/pgrue_000/xcards/www/lib/ngCordova/bower.json",
+		"/C/Users/pgrue_000/xcards/www/lib/ngCordova/src/plugins/contacts.js",
 		"/C/Users/pgrue_000/xcards/www/lib/angular/angular.js",
+		"/C/Users/pgrue_000/xcards/www/lib/restangular/dist/restangular.js",
+		"/C/Users/pgrue_000/xcards/www/js/directives.js",
+		"/C/Users/pgrue_000/xcards/platforms/android/assets/www/index.html",
+		"/C/Users/pgrue_000/xcards/www/config.xml",
+		"/C/Users/pgrue_000/xcards/config.xml",
+		"/C/Users/pgrue_000/xcards/www/js/app.js",
+		"/C/Users/pgrue_000/xcards/ionic.project",
+		"/C/Users/pgrue_000/xcards/www/js/controllers.js",
+		"/C/Users/pgrue_000/xcards/www/js/services.js",
+		"/C/Users/pgrue_000/xcards/www/css/logo.css",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-facebook/lib/angular-facebook.js",
+		"/C/Users/pgrue_000/xcards/.gitignore",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-facebook/package.json",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-facebook/.bower.json",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-facebook/bower.json",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-facebook/lib/angular-facebook-phonegap.js",
+		"/C/Users/pgrue_000/xcards/gulpfile.js",
+		"/C/Users/pgrue_000/xcards/www/css/ionic.app.css",
+		"/C/Users/pgrue_000/xcards/www/lib/ionic/scss/_loading.scss",
+		"/C/Users/pgrue_000/xcards/www/lib/ionic/scss/ionic.scss",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-local-storage/angular-local-storage.js",
+		"/C/Users/pgrue_000/xcards/www/templates/address-create.html",
+		"/C/Users/pgrue_000/xcards/www/templates/address-detail.html",
+		"/C/Users/pgrue_000/xcards/www/templates/address-edit.html",
+		"/C/Users/pgrue_000/xcards/www/lib/lodash/dist/lodash.js",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-resource/angular-resource.js",
+		"/C/Users/pgrue_000/xcards/www/lib/restangular/karma.conf.js",
+		"/C/Users/pgrue_000/xcards/www/lib/angular-http-auth/src/http-auth-interceptor.js",
 		"/C/Users/pgrue_000/xcards/www/templates/tab-card.html",
 		"/C/Users/pgrue_000/AppData/Roaming/Sublime Text 2/Packages/Color Scheme - Default/Monokai.tmTheme",
 		"/C/Users/pgrue_000/xcards/www/templates/menu.html",
 		"/C/Users/pgrue_000/xcards/test/karma.conf.js",
-		"/C/Users/pgrue_000/xcards/www/js/controllers.js",
 		"/C/Users/pgrue_000/xcards/test/unit/controllersSpec.js",
 		"/C/Users/pgrue_000/xcards/package.json",
-		"/C/Users/pgrue_000/xcards/ionic.project",
 		"/C/Users/pgrue_000/xcards/test/protractor-conf.js",
 		"/C/Users/pgrue_000/xcards/test/unit/servicesSpec.js",
 		"/C/Users/pgrue_000/xcards/Gruntfile.js",
-		"/C/Users/pgrue_000/xcards/www/css/ionic.app.css",
-		"/C/Users/pgrue_000/xcards/scss/ionic.app.scss",
 		"/C/Users/pgrue_000/xcards/www/.gitignore",
 		"/C/Users/pgrue_000/xcards/sublimeProject.sublime-workspace",
 		"/C/Users/pgrue_000/xcards/ionic.sublime-workspace"
 	],
 	"find":
 	{
-		"height": 37.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -162,6 +184,119 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"cacheandCall",
+			"transfer",
+			"transferService",
+			"dash",
+			"confirm",
+			"selected",
+			"addressesModal",
+			"preference",
+			"valid",
+			"validate",
+			"bag",
+			"stripChars",
+			"trim",
+			"isInteger",
+			"isstring",
+			"isString",
+			"null",
+			"recipient.addressee",
+			"preferred",
+			"none found",
+			"confirm",
+			"enco",
+			"encoded",
+			"create:",
+			"param",
+			".post",
+			"transferCtrl",
+			"ngMin",
+			"saveCreate",
+			"UserSErvice",
+			"LocalStorage",
+			"common",
+			"auth-logout",
+			"getUser(",
+			"saveUser",
+			"UserSErvice",
+			"localStorageService",
+			"localStorage",
+			"CacheAndCall",
+			"userService",
+			"authenticate(",
+			"USerSErvice",
+			"broadcast",
+			"[0",
+			"preference",
+			"prefe",
+			"preferred",
+			"prefer",
+			"prefferedCtrl",
+			"createModal",
+			"createModalCtrl",
+			"createModal",
+			"createCtrl",
+			"back",
+			"push",
+			"radio",
+			"addresse ",
+			"addresse",
+			"save",
+			"preference",
+			"0055",
+			"length",
+			"permission",
+			"saveUser",
+			"send",
+			"sms",
+			"send",
+			"destroy",
+			"$destroy",
+			"modal.remove",
+			"modal.hide",
+			"[item]",
+			".item",
+			"item",
+			"name.formatted",
+			"config",
+			"config\\",
+			"config",
+			"cordova",
+			"timeout",
+			"setValid",
+			"setValidity",
+			"form",
+			"$parse",
+			"register",
+			"stateParams",
+			"token",
+			"provider",
+			"provider\\",
+			"get",
+			"init",
+			"login(",
+			"permission",
+			"facebook",
+			"ngFacebook",
+			"status",
+			"login",
+			"getlogin",
+			"getLoginSFlogin",
+			"getLoginS",
+			"user ",
+			"user",
+			"getLoginStatus",
+			");\n",
+			"error",
+			"username",
+			"usernameemai",
+			"username",
+			"password2",
+			"save",
+			"})\n",
+			"lastName",
+			"firstName",
 			"User",
 			"UserService",
 			"loginModal",
@@ -176,28 +311,7 @@
 			"loginModal",
 			"getUser",
 			"self",
-			"this",
-			"param",
-			"$http",
-			"$resource",
-			"resource",
-			"storage",
-			"log",
-			"login",
-			"resource",
-			"success",
-			"config",
-			"updater",
-			"configupdater",
-			"header",
-			"get",
-			"friend",
-			"friends",
-			"sideMenu",
-			"angular",
-			"stable",
-			"2C3E50",
-			"royal"
+			"this"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -215,7 +329,6 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
 				{
@@ -223,15 +336,15 @@
 					"file": "www/js/app.js",
 					"settings":
 					{
-						"buffer_size": 4485,
+						"buffer_size": 4976,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								464,
-								464
+								2448,
+								2452
 							]
 						],
 						"settings":
@@ -241,7 +354,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 936.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -251,15 +364,15 @@
 					"file": "www/js/controllers.js",
 					"settings":
 					{
-						"buffer_size": 4585,
+						"buffer_size": 12845,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								41,
-								41
+								240,
+								240
 							]
 						],
 						"settings":
@@ -279,70 +392,15 @@
 					"file": "www/js/directives.js",
 					"settings":
 					{
-						"buffer_size": 819,
+						"buffer_size": 6914,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								819,
-								819
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "www/templates/register.html",
-					"settings":
-					{
-						"buffer_size": 2641,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1950,
-								1950
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "www/js/services.js",
-					"settings":
-					{
-						"buffer_size": 6936,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								438,
-								438
+								1443,
+								1443
 							]
 						],
 						"settings":
@@ -352,25 +410,53 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 120.0,
+						"translation.y": 798.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "www/templates/address-create.html",
+					"buffer": 3,
+					"file": "www/js/services.js",
 					"settings":
 					{
-						"buffer_size": 576,
+						"buffer_size": 11912,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								33,
-								33
+								681,
+								681
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 119.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "www/templates/transfer.html",
+					"settings":
+					{
+						"buffer_size": 1876,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								266,
+								266
 							]
 						],
 						"settings":
@@ -385,85 +471,81 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "www/lib/angular-local-storage/angular-local-storage.js",
+					"buffer": 5,
+					"file": "scss/ionic.app.scss",
 					"settings":
 					{
-						"buffer_size": 13029,
+						"buffer_size": 1522,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1522,
+								1522
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 684.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "www/cordova.mock.js",
+					"settings":
+					{
+						"buffer_size": 2338,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1288,
+								1288
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 171.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "www/templates/login.html",
+					"file": "www/templates/preferenceModal.html",
 					"settings":
 					{
-						"buffer_size": 1140,
+						"buffer_size": 1759,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1066,
-								1066
+								581,
+								581
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "www/index.html",
-					"settings":
-					{
-						"buffer_size": 1795,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1177,
-								1177
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 240.0,
+						"translation.y": 171.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -512,6 +594,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"conrollers",
+				"www/js/controllers.js"
+			],
+			[
+				"addressesmoda",
+				"www/templates/addressesModal.html"
+			],
 			[
 				"direc",
 				"www/js/directives.js"

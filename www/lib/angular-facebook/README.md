@@ -3,78 +3,97 @@ Angular-Facebook
 
 [![Build Status](https://travis-ci.org/Ciul/angular-facebook.png?branch=master)](https://travis-ci.org/Ciul/angular-facebook) 
 [![Dependency Status](https://david-dm.org/Ciul/angular-facebook.png)](https://david-dm.org/Ciul/angular-facebook) 
+[![devDependency Status](https://david-dm.org/Ciul/angular-facebook/dev-status.png)](https://david-dm.org/Ciul/angular-facebook#info=devDependencies)
 
-An AngularJS module to take approach of the [Facebook Javascript SDK](https://developers.facebook.com/docs/reference/javascript/).
+An AngularJS module based approach to the [Facebook Javascript SDK](https://developers.facebook.com/docs/reference/javascript/).
 
 ## Demo
 
-You can find a sample usage [in this demo](http://plnkr.co/edit/dDAmvdCibv46ULfgKCd3?p=preview).
+[Sample application](http://plnkr.co/edit/dDAmvdCibv46ULfgKCd3?p=preview).
 
 ## Install
 
 install with bower
-
-    bower install angular-facebook
-
+```bash
+bower install angular-facebook
+```
 or download the [master.zip](https://github.com/Ciul/angular-facebook/archive/master.zip)
 
 ## Usage
 
-You first have to declare dependency of ```facebook``` module inside your app module (perhaps inside your app main module).
+You first have to declare the ```facebook``` module dependency inside your app module (perhaps inside your app main module).
 Then you need to configure the facebook module using the 'FacebookProvider':
 
 ```javascript
-var app = angular.module('app', ['facebook']); // inject facebook module
+angular.module('app', ['facebook'])
 
-app.config(['FacebookProvider', function(FacebookProvider) {
-     // Here you could set your appId throug the setAppId method and then initialize
-     // or use the shortcut in the initialize method directly.
-     FacebookProvider.init('my-ap-id');
-}])
+  .config(function(FacebookProvider) {
+     // Set your appId through the setAppId method or
+     // use the shortcut in the initialize method directly.
+     FacebookProvider.init('YOUR_APP_ID');
+  })
 
-app.controller('authenticationCtrl', ['$scope', 'Facebook', function($scope, Facebook) {
+  .controller('authenticationCtrl', function($scope, Facebook) {
 
-  // Here, usually you should watch for when Facebook is ready and loaded
-  $watch(function() {
-    return Facebook.isReady(); // This is for convenience, to notify if Facebook is loaded and ready to go.
-  }, function(newVal) {
-    $scope.facebookReady = true; // You might want to use this to disable/show/hide buttons and else
-  });
-  
-  // From now and on you can use the Facebook service just as Facebook api says
-  // Take into account that you will need $scope.$apply when being inside Facebook functions scope and not angular
-  $scope.login = function() {
-    Facebook.login(function(response) {
-      // Do something with response. Don't forget here you are on Facebook scope so use $scope.$apply
-    });
-  };
-  
-  $scope.getLoginStatus = function() {
-    Facebook.getLoginStatus(response) {
-      if(response.status == 'connected')
-        $scope.$apply(function() {
+    $scope.login = function() {
+      // From now on you can use the Facebook service just as Facebook api says
+      Facebook.login(function(response) {
+        // Do something with response.
+      });
+    };
+
+    $scope.getLoginStatus = function() {
+      Facebook.getLoginStatus(function(response) {
+        if(response.status === 'connected') {
           $scope.loggedIn = true;
-        });
-      else
-        $scope.$apply(function() {
+        } else {
           $scope.loggedIn = false;
-        });
-      }
+        }
+      });
     };
 
     $scope.me = function() {
       Facebook.api('/me', function(response) {
-        $scope.$apply(function() {
-          // Here you could re-check for user status (just in case)
-          $scope.user = response;
-        });
+        $scope.user = response;
       });
     };
-}]);
+  });
 ```
 
-## Running Test
+You can use the `isReady` function to get notified when the Facebook SDK is ready
 
-First install the dependencies with npm: `npm install`
+```javascript
+$scope.$watch(function() {
+  // This is for convenience, to notify if Facebook is loaded and ready to go.
+  return Facebook.isReady();
+}, function(newVal) {
+  // You might want to use this to disable/show/hide buttons and else
+  $scope.facebookReady = true;
+});
+```
 
-Run the tests with `grunt karma:dev` (file watch / Chrome)
+Development
+-------------
+
+Install all dependencies and use gulp to watch the tests
+
+```
+# Install node.js dependencies
+npm install
+
+# Install bower components
+bower install
+
+# Run karma tests
+gulp watch
+```
+
+To run protractor tests you need to install protractor first. ([Protractor Setup](https://github.com/angular/protractor/blob/master/docs/tutorial.md#setup))
+
+```
+# Prepare the testapp
+gulp prepare-testapp
+
+# Run protractor tests
+protractor protractor.config.js
+```
