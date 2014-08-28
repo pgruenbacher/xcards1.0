@@ -76,6 +76,36 @@ angular.module('starter.directives', [])
     return result;
   }
 })
+.directive('imageContainer',['$ionicActionSheet',function($ionicActionSheet){
+  function link(scope,elem,attrs){
+    scope.choose=function(){
+      // Show the action sheet
+     var hideSheet = $ionicActionSheet.show({
+       buttons: [
+         {text:'Camera'},
+         {text:'Photo Album'},
+         {text:'Facebook, Instagram, etc.'}
+       ],
+       titleText: 'choose a picture',
+       cancelText: 'Cancel',
+       cancel: function() {
+            // add cancel code..
+          },
+       buttonClicked: function(index) {
+          console.log(index);
+         return true;
+       }
+     });
+    };
+  }
+  return{
+    restrict: 'E',
+    templateUrl:'templates/img-container.html',
+    scope:{
+    },
+    link: link
+  }
+}])
 .directive('passwordMatch',[function(){
   return {
         restrict: 'A',

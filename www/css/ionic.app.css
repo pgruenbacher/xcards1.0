@@ -7395,3 +7395,11 @@ form.ng-submitted input.ng-valid + i.icon.error {
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0; }
+
+.img-responsive {
+  width: 90vw;
+  height: 50.625vw;
+  background: pink;
+  max-height: 90vh;
+  max-width: 177.78vh;
+  margin: auto; }

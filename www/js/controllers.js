@@ -252,8 +252,11 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CardCtrl', function($scope) {
-})
 
+})
+.controller('SingleCtrl',function($scope){
+  
+})
 /*Controller for all of app to detect http authourization*/
 .controller('AppCtrl', function($scope, $state, $ionicModal) {
    

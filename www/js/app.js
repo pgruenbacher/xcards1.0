@@ -109,7 +109,16 @@ angular.module('starter',
         }
       }
     })
-   .state('app.addresses', {
+    .state('app.build-single', {
+      url: '/build/single',
+      views: {
+        'tab-card': {
+          templateUrl: 'templates/single.html',
+          controller: 'SingleCtrl'
+        }
+      }
+    })
+    .state('app.addresses', {
       url: '/addresses',
       views: {
         'tab-addresses': {
